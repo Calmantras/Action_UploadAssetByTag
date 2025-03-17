@@ -53,12 +53,12 @@ const fs = require("fs");
         // API Documentation: https://developer.github.com/v3/repos/releases/#upload-a-release-asset
         // Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-upload-release-asset
         const uploadAssetResponse = await gh.repos.uploadReleaseAsset({
-            upload_url: upload_url,
+            url: upload_url,
             headers,
             name: assetName,
             file: fs.readFileSync(assetPath)
         })
-
+        core.info('Uploaded');
         // Get the browser_download_url for the uploaded release asset from the response
         const {
             data: { browser_download_url: browserDownloadUrl }

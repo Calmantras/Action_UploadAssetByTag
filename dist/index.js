@@ -25990,11 +25990,12 @@ var fs = require("fs");
       "content-length": contentLength(assetPath)
     };
     const uploadAssetResponse = await gh.repos.uploadReleaseAsset({
-      upload_url,
+      url: upload_url,
       headers,
       name: assetName,
       file: fs.readFileSync(assetPath)
     });
+    core.info("Uploaded");
     const {
       data: { browser_download_url: browserDownloadUrl }
     } = uploadAssetResponse;
