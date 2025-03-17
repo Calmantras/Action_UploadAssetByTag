@@ -1,5 +1,5 @@
 {
-  "name": "action_deleteontag",
+  "name": "action_deletebytag",
   "version": "1.0.0",
   "description": "Action that deletes all assets of a release, specified by tag",
   "main": "index.js",

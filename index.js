@@ -49,6 +49,8 @@ const fs = require("fs");
             'content-length': contentLength(assetPath)
         }
 
+        const upload_file =  fs.readFileSync(assetPath)
+
         // Upload a release asset
         // API Documentation: https://developer.github.com/v3/repos/releases/#upload-a-release-asset
         // Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-upload-release-asset
@@ -56,7 +58,7 @@ const fs = require("fs");
             url: upload_url,
             headers,
             name: assetName,
-            file: fs.readFileSync(assetPath)
+            data: upload_file
         })
         core.info('Uploaded');
         // Get the browser_download_url for the uploaded release asset from the response
