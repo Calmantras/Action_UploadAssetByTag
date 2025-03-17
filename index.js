@@ -43,13 +43,14 @@ const fs = require("fs");
         // Determine content-length for header to upload asset
         const contentLength = (filePath) => fs.statSync(filePath).size
 
+        const upload_file =  fs.readFileSync(assetPath)
+
         // Setup headers for API call, see Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-upload-release-asset for more information
         const headers = {
             'content-type': assetContentType,
-            'content-length': contentLength(assetPath)
+            'content-length': upload_file.length
         }
 
-        const upload_file =  fs.readFileSync(assetPath)
 
         // Upload a release asset
         // API Documentation: https://developer.github.com/v3/repos/releases/#upload-a-release-asset

@@ -25985,15 +25985,16 @@ var fs = require("fs");
     core.info(`Found Repo with tag: ${assetTag}. Id is: ${releaseId}`);
     core.info(`Uploading... `);
     const contentLength = (filePath) => fs.statSync(filePath).size;
+    const upload_file = fs.readFileSync(assetPath);
     const headers = {
       "content-type": assetContentType,
-      "content-length": contentLength(assetPath)
+      "content-length": upload_file.length
     };
     const uploadAssetResponse = await gh.repos.uploadReleaseAsset({
       url: upload_url,
       headers,
       name: assetName,
-      file: fs.readFileSync(assetPath)
+      data: upload_file
     });
     core.info("Uploaded");
     const {
