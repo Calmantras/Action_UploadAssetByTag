@@ -25989,7 +25989,7 @@ var fs = require("fs");
       "content-length": contentLength(assetPath)
     };
     const uploadAssetResponse = await gh.repos.uploadReleaseAsset({
-      url: releaseId,
+      release_id: releaseId,
       headers,
       name: assetName,
       file: fs.readFileSync(assetPath)
