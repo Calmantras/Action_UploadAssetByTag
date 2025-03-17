@@ -1,0 +1,29 @@
+name: 'Upload Release Assets By Tag'
+description: 'Uploads an release asset specified by tag name'
+author: 'Jérôme von Daak'
+inputs:
+  asset_tag:
+    description: 'The Tag of the release we are searching for'
+    required: false
+  asset_path:
+    description: 'The path to the asset you want to upload'
+    required: true
+  asset_name:
+    description: 'The name of the asset you want to upload'
+    required: true
+  asset_content_type:
+    description:
+      'The content-type of the asset you want to upload. See the supported Media
+      Types here: https://www.iana.org/assignments/media-types/media-types.xhtml
+      for more information'
+    required: true
+outputs:
+  browser_download_url:
+    description:
+      'The URL users can navigate to in order to download the uploaded asset'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+branding:
+  icon: 'cloud'
+  color: 'blue'

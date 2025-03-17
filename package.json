@@ -1,0 +1,20 @@
+{
+  "name": "action_deleteontag",
+  "version": "1.0.0",
+  "description": "Action that deletes all assets of a release, specified by tag",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": ".\\node_modules\\.bin\\esbuild .\\index.js --bundle --platform=node --outfile=.\\dist\\index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^4.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.1"
+  }
+}
