@@ -26,14 +26,15 @@ const fs = require("fs");
         const assetContentType = core.getInput('asset_content_type', {required: true})
 
         // Getting the uploadUrl of the Release with the Latest tag
-        const releaseIdResponse = await gh.repos.getReleaseByTag({
+        const releaseRes = await gh.repos.getReleaseByTag({
             owner: assetOwner,
             repo: assetRepo,
             tag: assetTag
         })
 
         // The releaseId with specified tag
-        const releaseId = releaseIdResponse.data.id
+        const releaseId = releaseRes.data.id
+        const upload_url = releaseRes.data.upload_url
         core.info(`Found Repo with tag: ${assetTag}. Id is: ${releaseId}`)
         core.info(`Uploading... `)
         // Get the inputs from the workflow file: https://github.com/actions/toolkit/tree/master/packages/core#inputsoutputs
@@ -52,7 +53,7 @@ const fs = require("fs");
         // API Documentation: https://developer.github.com/v3/repos/releases/#upload-a-release-asset
         // Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-upload-release-asset
         const uploadAssetResponse = await gh.repos.uploadReleaseAsset({
-            release_id: releaseId,
+            upload_url: upload_url,
             headers,
             name: assetName,
             file: fs.readFileSync(assetPath)

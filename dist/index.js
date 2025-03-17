@@ -25975,12 +25975,13 @@ var fs = require("fs");
     const assetPath = core.getInput("asset_path", { required: true });
     const assetName = core.getInput("asset_name", { required: true });
     const assetContentType = core.getInput("asset_content_type", { required: true });
-    const releaseIdResponse = await gh.repos.getReleaseByTag({
+    const releaseRes = await gh.repos.getReleaseByTag({
       owner: assetOwner,
       repo: assetRepo,
       tag: assetTag
     });
-    const releaseId = releaseIdResponse.data.id;
+    const releaseId = releaseRes.data.id;
+    const upload_url = releaseRes.data.upload_url;
     core.info(`Found Repo with tag: ${assetTag}. Id is: ${releaseId}`);
     core.info(`Uploading... `);
     const contentLength = (filePath) => fs.statSync(filePath).size;
@@ -25989,7 +25990,7 @@ var fs = require("fs");
       "content-length": contentLength(assetPath)
     };
     const uploadAssetResponse = await gh.repos.uploadReleaseAsset({
-      release_id: releaseId,
+      upload_url,
       headers,
       name: assetName,
       file: fs.readFileSync(assetPath)
