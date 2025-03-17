@@ -52,7 +52,7 @@ const fs = require("fs");
         // API Documentation: https://developer.github.com/v3/repos/releases/#upload-a-release-asset
         // Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-upload-release-asset
         const uploadAssetResponse = await gh.repos.uploadReleaseAsset({
-            url: releaseId,
+            release_id: releaseId,
             headers,
             name: assetName,
             file: fs.readFileSync(assetPath)
