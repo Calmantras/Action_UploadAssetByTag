@@ -1,4 +1,4 @@
-# Upload Release Assets By Tag
+# Upload Release Asset By Tag
 
 GitHub Action to upload assets to a release identified by its tag name.
 
